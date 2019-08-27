@@ -89,14 +89,16 @@ public class VaeMNISTAnomaly {
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.init();
 
-        net.save(new File("output/VaeMNISTAnomaly_100b3.bin"));
+        net.save(new File("output/VaeMNISTAnomaly_100b4.bin"));
         Nd4j.getRandom().setSeed(12345);
         INDArray input = Nd4j.rand(3, 28*28);
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/VaeMNISTAnomaly_Input_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/VaeMNISTAnomaly_Input_100b4.bin")))) {
             Nd4j.write(input, dos);
         }
         INDArray output = net.output(input);
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/VaeMNISTAnomaly_Output_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/VaeMNISTAnomaly_Output_100b4.bin")))) {
             Nd4j.write(output, dos);
         }
     }

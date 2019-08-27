@@ -71,14 +71,16 @@ public class CustomLayerExample {
         MultiLayerNetwork net = new MultiLayerNetwork(config);
         net.init();
 
-        net.save(new File("output/CustomLayerExample_100b3.bin"));
+        net.save(new File("output/CustomLayerExample_100b4.bin"));
         Nd4j.getRandom().setSeed(12345);
         INDArray input = Nd4j.rand(new int[]{3, nIn});
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/CustomLayerExample_Input_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/CustomLayerExample_Input_100b4.bin")))) {
             Nd4j.write(input, dos);
         }
         INDArray output = net.output(input);
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/CustomLayerExample_Output_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/CustomLayerExample_Output_100b4.bin")))) {
             Nd4j.write(output, dos);
         }
     }

@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.deeplearning4j.nn.conf.BackpropType;
@@ -94,15 +95,16 @@ public class LSTMCharModellingExample {
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.init();
 
-
-        net.save(new File("output/GravesLSTMCharModelingExample_100b3.bin"));
+        net.save(new File("output/GravesLSTMCharModelingExample_100b4.bin"));
         Nd4j.getRandom().setSeed(12345);
         INDArray input = Nd4j.rand(new int[]{3, iter.inputColumns(), 10});
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/GravesLSTMCharModelingExample_Input_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/GravesLSTMCharModelingExample_Input_100b4.bin")))) {
             Nd4j.write(input, dos);
         }
         INDArray output = net.output(input);
-        try(DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/GravesLSTMCharModelingExample_Output_100b3.bin")))){
+        try (DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream(new File("output/GravesLSTMCharModelingExample_Output_100b4.bin")))) {
             Nd4j.write(output, dos);
         }
     }
@@ -130,7 +132,7 @@ public class LSTMCharModellingExample {
         if(!f.exists()) throw new IOException("File does not exist: " + fileLocation);	//Download problem?
 
         char[] validCharacters = CharacterIterator.getMinimalCharacterSet();	//Which characters are allowed? Others will be removed
-        return new CharacterIterator(fileLocation, Charset.forName("UTF-8"),
+        return new CharacterIterator(fileLocation, StandardCharsets.UTF_8,
                 miniBatchSize, sequenceLength, validCharacters, new Random(12345));
     }
 }

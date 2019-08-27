@@ -164,14 +164,16 @@ public class HouseNumberDetection {
                     .setOutputs("outputs")
                     .build();
 
-            model.save(new File("output/HouseNumberDetection_100b3.bin"));
+            model.save(new File("output/HouseNumberDetection_100b4.bin"));
             Nd4j.getRandom().setSeed(12345);
             INDArray input = Nd4j.rand(new int[]{3, 3, 416, 416});
-            try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/HouseNumberDetection_Input_100b3.bin")))) {
+            try (DataOutputStream dos = new DataOutputStream(
+                    new FileOutputStream(new File("output/HouseNumberDetection_Input_100b4.bin")))) {
                 Nd4j.write(input, dos);
             }
             INDArray output = model.outputSingle(input);
-            try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("output/HouseNumberDetection_Output_100b3.bin")))) {
+            try (DataOutputStream dos = new DataOutputStream(
+                    new FileOutputStream(new File("output/HouseNumberDetection_Output_100b4.bin")))) {
                 Nd4j.write(output, dos);
             }
         }
