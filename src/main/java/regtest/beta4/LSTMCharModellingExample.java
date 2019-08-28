@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import org.apache.commons.io.FileUtils;
@@ -35,27 +34,9 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.indexing.BooleanIndexing;
-import org.nd4j.linalg.indexing.conditions.Conditions;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction;
 
-/**LSTM Character modelling example
- * @author Alex Black
-
-Example: Train a LSTM RNN to generates text, one character at a time.
-This example is somewhat inspired by Andrej Karpathy's blog post,
-"The Unreasonable Effectiveness of Recurrent Neural Networks"
-http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-
-This example is set up to train on the Complete Works of William Shakespeare, downloaded
-from Project Gutenberg. Training on other text sources should be relatively easy to implement.
-
-For more details on RNNs in DL4J, see the following:
-http://deeplearning4j.org/usingrnns
-http://deeplearning4j.org/lstm
-http://deeplearning4j.org/recurrentnetwork
- */
 public class LSTMCharModellingExample {
     public static void main( String[] args ) throws Exception {
         int lstmLayerSize = 200;					//Number of units in each LSTM layer

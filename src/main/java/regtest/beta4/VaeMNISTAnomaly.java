@@ -33,28 +33,6 @@ import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.Adam;
 
-/**
- * This example performs unsupervised anomaly detection on MNIST using a variational autoencoder, trained with a Bernoulli
- * reconstruction distribution.
- *
- * For details on the variational autoencoder, see:
- * - Kingma and Welling, 2013 - Auto-Encoding Variational Bayes - https://arxiv.org/abs/1312.6114
- *
- * For the use of VAEs for anomaly detection using reconstruction probability see:
- * - An & Cho, 2015 - Variational Autoencoder based Anomaly Detection using Reconstruction Probability
- *   http://dm.snu.ac.kr/static/docs/TR/SNUDM-TR-2015-03.pdf
- *
- *
- * Unsupervised training is performed on the entire data set at once in this example. An alternative approach would be to
- * train one model for each digit.
- *
- * After unsupervised training, examples are scored using the VAE layer (reconstruction probability). Here, we are using the
- * labels to get the examples with the highest and lowest reconstruction probabilities for each digit for plotting. In a general
- * unsupervised anomaly detection situation, these labels would not be available, and hence highest/lowest probabilities
- * for the entire data set would be used instead.
- *
- * @author Alex Black
- */
 public class VaeMNISTAnomaly {
 
     public static void main(String[] args) throws IOException {

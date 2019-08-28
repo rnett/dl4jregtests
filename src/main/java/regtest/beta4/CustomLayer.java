@@ -32,11 +32,6 @@ import org.nd4j.linalg.activations.IActivation;
 import org.nd4j.linalg.api.buffer.DataType;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-/**
- * Layer configuration class for the custom layer example
- *
- * @author Alex Black
- */
 public class CustomLayer extends FeedForwardLayer {
 
     private IActivation secondActivationFunction;

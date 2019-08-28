@@ -16,15 +16,10 @@
 
 package regtest.beta4;
 
-import static org.bytedeco.opencv.global.opencv_core.*;
-import static org.bytedeco.opencv.global.opencv_imgproc.*;
-
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Random;
-import org.bytedeco.opencv.opencv_core.*;
-import org.bytedeco.opencv.opencv_imgproc.*;
 import org.datavec.image.recordreader.objdetect.ObjectDetectionRecordReader;
 import org.deeplearning4j.datasets.datavec.RecordReaderDataSetIterator;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
@@ -47,18 +42,6 @@ import org.nd4j.linalg.learning.config.Adam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Example transfer learning from a Tiny YOLO model pretrained on ImageNet and Pascal VOC
- * to perform object detection with bounding boxes on The Street View House Numbers (SVHN) Dataset.
- * <p>
- * References: <br>
- * - YOLO: Real-Time Object Detection: https://pjreddie.com/darknet/yolo/ <br>
- * - The Street View House Numbers (SVHN) Dataset: http://ufldl.stanford.edu/housenumbers/ <br>
- * <p>
- * Please note, cuDNN should be used to obtain reasonable performance: https://deeplearning4j.org/cudnn
- *
- * @author saudet
- */
 public class HouseNumberDetection {
     private static final Logger log = LoggerFactory.getLogger(HouseNumberDetection.class);
 

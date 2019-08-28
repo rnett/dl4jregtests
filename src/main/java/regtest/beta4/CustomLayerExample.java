@@ -33,12 +33,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.RmsProp;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-/**
- * Custom layer example. This example shows the use and some basic testing for a custom layer implementation.
- * For more details, see the CustomLayerExampleReadme.md file
- *
- * @author Alex Black
- */
 public class CustomLayerExample {
 
     static{
