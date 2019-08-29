@@ -36,7 +36,7 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 public class CustomLayerExample {
 
     public static void main(String[] args) throws IOException {
-        DataType[] dtypes = new DataType[]{DataType.DOUBLE, DataType.FLOAT, DataType.HALF};
+        DataType[] dtypes = new DataType[]{DataType.HALF, DataType.FLOAT, DataType.HALF};
         for (DataType dtype : dtypes) {
             makeTest(dtype);
         }
@@ -51,7 +51,7 @@ public class CustomLayerExample {
         //Let's create a network with our custom layer
 
         MultiLayerConfiguration config = new NeuralNetConfiguration.Builder()
-
+                .dataType(dtype)
                 .updater( new RmsProp(0.95))
                 .weightInit(WeightInit.XAVIER)
                 .l2(0.03)
