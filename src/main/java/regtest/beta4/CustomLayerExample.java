@@ -35,13 +35,17 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 public class CustomLayerExample {
 
-    static{
-        //Double precision for the gradient checks. See comments in the doGradientCheck() method
-        // See also http://nd4j.org/userguide.html#miscdatatype
-        Nd4j.setDefaultDataTypes(DataType.DOUBLE, DataType.DOUBLE);
+    public static void main(String[] args) throws IOException {
+        DataType[] dtypes = new DataType[]{DataType.DOUBLE, DataType.FLOAT, DataType.HALF};
+        for (DataType dtype : dtypes) {
+            makeTest(dtype);
+        }
     }
 
-    public static void main(String[] args) throws IOException {int nIn = 5;
+    public static void makeTest(DataType dtype) throws IOException {
+        Nd4j.setDefaultDataTypes(dtype, dtype);
+        String dtypeName = dtype.toString().toLowerCase();
+        int nIn = 5;
         int nOut = 8;
 
         //Let's create a network with our custom layer
@@ -65,16 +69,16 @@ public class CustomLayerExample {
         MultiLayerNetwork net = new MultiLayerNetwork(config);
         net.init();
 
-        net.save(new File("output/CustomLayerExample_100b4.bin"));
+        net.save(new File("output/CustomLayerExample_100b4_" + dtypeName + ".bin"));
         Nd4j.getRandom().setSeed(12345);
         INDArray input = Nd4j.rand(new int[]{3, nIn});
         try (DataOutputStream dos = new DataOutputStream(
-                new FileOutputStream(new File("output/CustomLayerExample_Input_100b4.bin")))) {
+                new FileOutputStream(new File("output/CustomLayerExample_Input_100b4_" + dtypeName + ".bin")))) {
             Nd4j.write(input, dos);
         }
         INDArray output = net.output(input);
         try (DataOutputStream dos = new DataOutputStream(
-                new FileOutputStream(new File("output/CustomLayerExample_Output_100b4.bin")))) {
+                new FileOutputStream(new File("output/CustomLayerExample_Output_100b4_" + dtypeName + ".bin")))) {
             Nd4j.write(output, dos);
         }
     }
