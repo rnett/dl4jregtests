@@ -19,6 +19,8 @@ package regtest.beta4;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import org.datavec.image.recordreader.objdetect.ObjectDetectionRecordReader;
 import org.deeplearning4j.datasets.datavec.RecordReaderDataSetIterator;
@@ -35,6 +37,7 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.util.ModelSerializer;
 import org.deeplearning4j.zoo.model.TinyYOLO;
 import org.nd4j.linalg.activations.Activation;
+import org.nd4j.linalg.api.buffer.DataType;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.factory.Nd4j;
@@ -46,7 +49,6 @@ public class HouseNumberDetection {
     private static final Logger log = LoggerFactory.getLogger(HouseNumberDetection.class);
 
     public static void main(String[] args) throws java.lang.Exception {
-
         // parameters matching the pretrained TinyYOLO model
         int width = 416;
         int height = 416;
@@ -108,7 +110,7 @@ public class HouseNumberDetection {
             log.info("Build model...");
 
             ComputationGraph pretrained = (ComputationGraph) TinyYOLO.builder().build().initPretrained();
-            INDArray priors = Nd4j.create(priorBoxes);
+            INDArray priors = Nd4j.create(priorBoxes).castTo(DataType.FLOAT);
 
             FineTuneConfiguration fineTuneConf = new FineTuneConfiguration.Builder()
                     .seed(seed)
